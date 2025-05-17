@@ -39,33 +39,38 @@ const FloatingEnquireButton = () => {
       return;
     }
 
-    try {
-      const res = await fetch("https://formspree.io/f/mpwdbrlp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
-      });
+    // Google Form entry IDs
+    const formBody = new URLSearchParams({
+      'entry.404169681': formData.name,
+      'entry.1438851795': formData.email,
+      'entry.1612487710': formData.phone,
+      'entry.772243822': formData.message,
+    });
 
-      if (res.ok) {
-        toast({
-          title: "Success",
-          description: "Thank you! Your enquiry has been sent."
-        });
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          message: ""
-        });
-        setOpen(false);
-      } else {
-        const data = await res.json();
-        toast({
-          title: "Error",
-          description: data?.message || "Something went wrong. Please try again.",
-          variant: "destructive"
-        });
-      }
+    try {
+      await fetch(
+        "https://docs.google.com/forms/d/e/1FAIpQLSe7kstdYQeYz_kNjRqirhGWLTamnGyhyNGRJlOIe7E6hhQ2cw/formResponse",
+        {
+          method: "POST",
+          mode: "no-cors", // IMPORTANT: This avoids CORS errors
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: formBody.toString(),
+        }
+      );
+
+      toast({
+        title: "Success",
+        description: "Thank you! Your enquiry has been sent."
+      });
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: ""
+      });
+      setOpen(false);
     } catch (err) {
       toast({
         title: "Server Error",
