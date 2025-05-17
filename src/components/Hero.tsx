@@ -28,24 +28,27 @@ const Hero = () => {
     }
 
     setSubmitting(true);
+
+    // Google Form entry IDs
+    const formBody = new URLSearchParams({
+      'entry.404169681': formData.name,
+      'entry.1612487710': formData.phone,
+      'entry.1438851795': formData.email,
+      'entry.772243822': formData.message,
+    });
+
     try {
-      const res = await fetch('https://formspree.io/f/mpwdbrlp', {
+      await fetch('https://docs.google.com/forms/d/e/1FAIpQLSe7kstdYQeYz_kNjRqirhGWLTamnGyhyNGRJlOIe7E6hhQ2cw/formResponse', {
         method: 'POST',
+        mode: 'no-cors', // IMPORTANT: This avoids CORS errors
         headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json'
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify(formData)
+        body: formBody.toString(),
       });
 
-      const result = await res.json();
-
-      if (res.ok) {
-        setSuccessMsg('Thank you! Your enquiry has been sent.');
-        setFormData({ name: '', phone: '', email: '', message: '' });
-      } else {
-        setErrorMsg(result?.errors?.[0]?.message || 'Something went wrong. Please try again.');
-      }
+      setSuccessMsg('Thank you! Your enquiry has been sent.');
+      setFormData({ name: '', phone: '', email: '', message: '' });
     } catch (err) {
       setErrorMsg('Could not connect to server. Please try again.');
     }
