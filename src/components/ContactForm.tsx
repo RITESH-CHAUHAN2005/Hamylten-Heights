@@ -11,7 +11,7 @@ const ContactForm = () => {
     message: ""
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -19,7 +19,7 @@ const ContactForm = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.name || !formData.email || !formData.phone) {
@@ -31,34 +31,37 @@ const ContactForm = () => {
       return;
     }
 
-    try {
-      const res = await fetch("https://formspree.io/f/mpwdbrlp", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+    // Google Form entry IDs
+    const formBody = new URLSearchParams({
+      'entry.404169681': formData.name,
+      'entry.1438851795': formData.email,
+      'entry.1612487710': formData.phone,
+      'entry.772243822': formData.message,
+    });
 
-      if (res.ok) {
-        toast({
-          title: "Inquiry Sent!",
-          description: "We'll get back to you soon.",
-        });
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          message: "",
-        });
-      } else {
-        const data = await res.json();
-        toast({
-          title: "Failed",
-          description: data?.message || "Something went wrong.",
-          variant: "destructive",
-        });
-      }
+    try {
+      await fetch(
+        "https://docs.google.com/forms/d/e/1FAIpQLSe7kstdYQeYz_kNjRqirhGWLTamnGyhyNGRJlOIe7E6hhQ2cw/formResponse",
+        {
+          method: "POST",
+          mode: "no-cors", // IMPORTANT: This avoids CORS errors
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: formBody.toString(),
+        }
+      );
+
+      toast({
+        title: "Inquiry Sent!",
+        description: "We'll get back to you soon.",
+      });
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
     } catch (error) {
       toast({
         title: "Error",
