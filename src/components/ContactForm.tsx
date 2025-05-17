@@ -96,7 +96,7 @@ const ContactForm = () => {
                 <div>
                   <p className="text-white font-medium">Call Us</p>
                   <a href="tel:+917986899393" className="text-white/80 hover:text-hamylten-gold transition-colors">
-                    +91 7986899393
+                    +91 7717278888
                   </a>
                 </div>
               </div>
@@ -104,7 +104,7 @@ const ContactForm = () => {
                 <Mail className="text-hamylten-gold mt-1" size={20} />
                 <div>
                   <p className="text-white font-medium">Email Us</p>
-                  <p className="text-white/80">info@hamyltenheights.com</p>
+                  <p className="text-white/80">earnestinemeche@gmail.com</p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
