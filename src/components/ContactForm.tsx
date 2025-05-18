@@ -100,8 +100,8 @@ const ContactForm = () => {
                   </a>
                 </div>
               </div>
-              <div className="flex items-start space-x-4">
-                <Mail className="text-hamylten-gold mt-1" size={20} />
+                <div className="flex items-center space-x-4">
+                <Mail className="text-hamylten-gold flex-shrink-0 min-w-[20px]" size={20} />
                 <div>
                   <p className="text-white font-medium">Email Us</p>
                   <p className="text-white/80">earnestinemeche@gmail.com</p>
