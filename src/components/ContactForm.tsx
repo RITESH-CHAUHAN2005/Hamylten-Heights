@@ -96,7 +96,7 @@ const ContactForm = () => {
                 <div>
                   <p className="text-white font-medium">Call Us</p>
                   <a href="tel:+917986899393" className="text-white/80 hover:text-hamylten-gold transition-colors">
-                    +91 7717278888
+                    +91 7986899393
                   </a>
                 </div>
               </div>
