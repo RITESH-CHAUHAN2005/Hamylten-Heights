@@ -107,16 +107,16 @@ const ContactForm = () => {
                   <p className="text-white/80">earnestinemeche@gmail.com</p>
                 </div>
               </div>
-              <div className="flex items-start space-x-4">
-                <MapPin className="text-hamylten-gold mt-1" size={20} />
-                <div>
-                  <p className="text-white font-medium">Visit Us</p>
-                  <p className="text-white/80">
-                    NH-205A, Delhi-Manali Highway, <br />
-                    Greater Mohali (Near Tangori College)
-                  </p>
-                </div>
+              <div className="flex items-center space-x-4">
+              <MapPin className="text-hamylten-gold flex-shrink-0 min-w-[20px]" size={20} />
+              <div>
+                <p className="text-white font-medium">Visit Us</p>
+                <p className="text-white/80">
+                  NH-205A, Delhi-Manali Highway, <br />
+                  Greater Mohali (Near Tangori College)
+                </p>
               </div>
+            </div>
             </div>
             <div className="mt-8 p-4 bg-white/5 rounded-lg">
               <p className="text-hamylten-gold font-bold mb-2">Business Hours:</p>
